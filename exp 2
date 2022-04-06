@@ -1,0 +1,151 @@
+1.     Add a column ‘SSN’ at the first
+position in the table EMPLOYEE 
+
+
+mysql> alter table employee add column ssn int first;
+Query OK, 0 rows affected (0.77 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  |     | NULL    |       |
+| emp_id   | varchar(5)  | YES  |     | NULL    |       |
+| name     | varchar(23) | YES  |     | NULL    |       |
+| city     | varchar(12) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int(12)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------
+
+2.    Change the data type of the column
+‘DOB’  in year the table EMPLOYEE    
+
+
+mysql> alter table employee modify dob year;
+Query OK, 0 rows affected (0.83 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  |     | NULL    |       |
+| emp_id   | varchar(5)  | YES  |     | NULL    |       |
+| name     | varchar(23) | YES  |     | NULL    |       |
+| city     | varchar(12) | YES  |     | NULL    |       |
+| dob      | year(4)     | YES  |     | NULL    |       |
+| adhar_no | int(12)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+----------------------------------------------------------------------------------
+
+3.    
+Delete
+the column ‘emp_id’ the table EMPLOYEE. 
+
+
+mysql> alter table employee drop emp_id;
+Query OK, 0 rows affected (1.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(23) | YES  |     | NULL    |       |
+| city     | varchar(12) | YES  |     | NULL    |       |
+| dob      | year(4)     | YES  |     | NULL    |       |
+| adhar_no | int(12)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+-------------------------------------------------------------------------------------------
+
+4.    
+Add  the constraint unique for columns ‘SSN, ‘adhar_no’
+the table EMPLOYEE
+
+mysql> alter table employee add constraint uni1 unique(ssn),add constraint un2 unique(adhar_no);
+Query OK, 0 rows affected (0.41 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  | UNI | NULL    |       |
+| name     | varchar(23) | YES  |     | NULL    |       |
+| city     | varchar(12) | YES  |     | NULL    |       |
+| dob      | year(4)     | YES  |     | NULL    |       |
+| adhar_no | int(12)     | YES  | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+------------------------------------------------------------------------------------------------------------------
+
+5.    
+Delete
+the NULL constraint of ‘age’ in the STUDENT table.
+
+
+mysql> alter table student modify age int null;
+Query OK, 0 rows affected (0.67 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int(11)     | NO   | PRI | NULL    |       |
+| name    | varchar(12) | NO   |     | NULL    |       |
+| age     | int(11)     | YES  |     | NULL    |       |
+| address | varchar(25) | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+6.    
+Change
+the table name EMPLOYEE as PERSON
+
+mysql> alter table employee rename to person1;
+Query OK, 0 rows affected (0.14 sec)
+
+
+mysql> desc person1;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ssn      | int(11)     | YES  | UNI | NULL    |       |
+| name     | varchar(23) | YES  |     | NULL    |       |
+| city     | varchar(12) | YES  |     | NULL    |       |
+| dob      | year(4)     | YES  |     | NULL    |       |
+| adhar_no | int(12)     | YES  | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+7.    
+Delete
+the table STUDENT1.
+
+mysql> drop table student1;
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> desc srudent1;
+ERROR 1146 (42S02): Table 'hasna.srudent1' doesn't exist
+mysql> 
+
