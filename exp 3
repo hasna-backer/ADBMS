@@ -1,0 +1,243 @@
+ 1.      Insert
+values in EMPLOYEE table.
+
+ insert into employee values(1,'hasna','ekm','1999-10-15',123456782);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into employee values(5,'scisna','ekm','1989-1-5',123456782);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into employee values(11,'amrtha','tvm','1989-11-25',123456);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee values(101,'vani','tvm','1979-2-25',134456);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into employee values(10,'sini','tvm','1988-5-5',13876556);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select *from employee;
++--------+--------+------+------------+-----------+
+| emp_id | name   | city | dob        | adhar_no  |
++--------+--------+------+------------+-----------+
+| 1      | hasna  | ekm  | 1999-10-15 | 123456782 |
+| 5      | scisna | ekm  | 1989-01-05 | 123456782 |
+| 11     | amrtha | tvm  | 1989-11-25 |    123456 |
+| 101    | vani   | tvm  | 1979-02-25 |    134456 |
+| 10     | sini   | tvm  | 1988-05-05 |  13876556 |
++--------+--------+------+------------+-----------+
+5 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------------------
+
+2.      Insert
+values in STUDENT table.
+
+mysql> insert imysql> insert into product(pid,pname,price) values(448,'pen',10),(411,'nonstick pan',700);
+Query OK, 2 rows affected (0.05 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select *from product;
++-----+--------------+--------+
+| pid | pname        | price  |
++-----+--------------+--------+
+| 404 | milk         |  15.00 |
+| 408 | pringles     | 100.00 |
+| 409 | sauce        |  70.00 |
+| 411 | nonstick pan | 700.00 |
+| 448 | pen          |  10.00 |
++-----+--------------+--------+
+5 rows in set (0.00 sec)
+
+nto student values(12,'hasna',22,'ettamtharayil house','f');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student values(13,'scisna',24,'karakkatt  house','f');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into student values(14,'amru',32,'puthiyavtl house','f');
+Query OK, 1 row affected (0.46 sec)
+
+mysql> insert into student values(16,'ammu',24,'dreame home','m');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into student values(17,'amras',25,'swapna home','m');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select *from student;
++---------+--------+------+---------------------+--------+
+| roll_no | name   | age  | address             | gender |
++---------+--------+------+---------------------+--------+
+|      12 | hasmysql> insert into product(pid,pname,price) values(448,'pen',10),(411,'nonstick pan',700);
+Query OK, 2 rows affected (0.05 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select *from product;
++-----+--------------+--------+
+| pid | pname        | price  |
++-----+--------------+--------+
+| 404 | milk         |  15.00 |
+| 408 | pringles     | 100.00 |
+| 409 | sauce        |  70.00 |
+| 411 | nonstick pan | 700.00 |
+| 448 | pen          |  10.00 |
++-----+--------------+--------+
+5 rows in set (0.00 sec)
+
+na  |   22 | ettamtharayil house | f      |
+|      13 | scisna |   24 | karakkatt  house    | f      |
+|      14 | amru   |   32 | puthiyavtl house    | f      |
+|      16 | ammu   |   24 | dreame home         | m      |
+|      17 | amras  |   25 | swapna home         | m      |
++---------+--------+------+---------------------+--------+
+5 rows in set (0.00 sec)
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+3.      Insert values in INVOICE database.
+
+CUSTOMER TABLE
+
+mysql> insert into customer values(17,'amras','swapna home','ekm',9048676977);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into customer values(111,'amrtha','vyga home','ccn',9048123327);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into customer values(110,'hasna','sweet home','tvm',9048345467);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into customer values(205,'scissna','dream home','tsr',9078986534);
+Query OK, 1 row affected (0.45 sec)
+
+mysql> insert into customer values(223,'mubeena',' rafeek manzil','ksd',9978654599);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into customer values(212,'sreekanth','sreenilayam','ksd',9978654599);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into customer(id,name,address,city) values(256,'sreekanth','sreenilayam','ksd');
+Query OK, 1 row affected (0.06 sec)
+
+
+mysql> insert into customer(id,name,address,city) values(286,'aza','home','tsr');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select *from customer;
++-----+-----------+----------------+------+------------+
+| id  | name      | address        | city | ph_no      |
++-----+-----------+----------------+------+------------+
+|  17 | amras     | swapna home    | ekm  | 9048676977 |
+| 110 | hasna     | sweet home     | tvm  | 9048345467 |
+| 111 | amrtha    | vyga home      | ccn  | 9048123327 |
+| 205 | scissna   | dream home     | tsr  | 9078986534 |
+| 212 | sreekanth | sreenilayam    | ksd  | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | ksd  | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd  |       NULL |
+| 286 | aza       | home           | tsr  |       NULL |
++-----+-----------+----------------+------+------------+
+8 rows in set (0.00 sec)
+
+PRODUCT TABLE
+
+mysql> insert into product(pid,pname,price) values(404,'milk',15);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into product(pid,pname,price) values(408,'pringles',100),(409,'sauce',70);
+Query OK, 2 rows affected (0.05 sec)
+
+mysql> insert inmysql> insert into product(pid,pname,price) values(448,'pen',10),(411,'nonstick pan',700);
+Query OK, 2 rows affected (0.05 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert inmysql> insert into product(pid,pname,price) values(414,'maggi',150),(423,'cooker',1700);
+Query OK, 2 rows affected (0.05 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select *from product;
++-----+--------------+---------+
+| pid | pname        | price   |
++-----+--------------+---------+
+| 404 | milk         |   15.00 |
+| 408 | pringles     |  100.00 |
+| 409 | sauce        |   70.00 |
+| 411 | nonstick pan |  700.00 |
+| 414 | maggi        |  150.00 |
+| 423 | cooker       | 1700.00 |
+| 448 | pen          |   10.00 |
++-----+--------------+---------+
+
+
+INVOICE_MASTER
+
+mysql> insert into invoice_master values(111,17,'2022-12-23');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into invoice_master values(222,223,'2022-2-23');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into invoice_master values(333,223,'2022-2-26');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into invoice_master values(444,17,'2022-4-26');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select *from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    111 |      17 | 2022-12-23 |
+|    222 |     223 | 2022-02-23 |
+|    333 |     223 | 2022-02-26 |
+|    444 |      17 | 2022-04-26 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+INVOICE_ITEM
+
+
+mysql> insert into invoice_item(inv_id,pid,quantity) values(111,404,5),(111,448,10);
+Query OK, 2 rows affected (0.06 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into invoice_item values(222,408,2);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_item values(222,409,1);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_item values(222,448,6);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into invoice_item values(333,448,10);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into invoice_item values(444,411,1);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into invoice_item values(444,404,2);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select *from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    111 |  404 |        5 |
+|    111 |  448 |       10 |
+|    222 |  408 |        2 |
+|    222 |  409 |        1 |
+|    222 |  448 |        6 |
+|    333 |  448 |       10 |
+|    444 |  411 |        1 |
+|    444 |  404 |        2 |
++--------+------+----------+
+8 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
