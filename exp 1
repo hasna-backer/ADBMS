@@ -43,7 +43,7 @@ mysql>
 
 
 B
-mysql> alter table student add constraint rpk primary key(roll_no);
+mysql> alter table student add constraint rpk primary key(roll_no);  /USE CREATE COMAND ONLY
 Query OK, 0 rows affected (0.72 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -60,7 +60,7 @@ mysql> desc student;
 5 rows in set (0.01 sec)
 
 C
-alter table student add constraint c check (age>0 and age<100);
+alter table student add constraint c check (age>0 and age<100);  //USE CREATE COMMAND ONLY
 Query OK, 0 rows affected (0.45 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -240,5 +240,5 @@ mysql> desc invoice_item;
 
 
 
-
+//EXP:1 IS DDL-CREATE COMMAND. SO USE CREATE COMMAND ONLY
 
