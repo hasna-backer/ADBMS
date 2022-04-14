@@ -149,3 +149,4 @@ mysql> desc srudent1;
 ERROR 1146 (42S02): Table 'hasna.srudent1' doesn't exist
 mysql> 
 
+//VERIFIED
