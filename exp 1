@@ -19,91 +19,9 @@ mysql> desc employee;
 
 2)
 A
-mysql> create table student(roll_no int,name varchar(12),age int,address varchar(25),gender char(1));
+mysql> create table student(roll_no int primary key,name varchar(12) not null,age int not null check (0-99),address varchar(25),gender char(1) default 'm');
 Query OK, 0 rows affected (0.30 sec)
 
-mysql> desc student;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| roll_no | int(11)     | YES  |     | NULL    |       |
-| name    | varchar(12) | YES  |     | NULL    |       |
-| age     | int(11)     | YES  |     | NULL    |       |
-| address | varchar(25) | YES  |     | NULL    |       |
-| gender  | char(1)     | YES  |     | NULL    |       |
-+---------+-------------+------+-----+---------+-------+
-5 rows in set (0.00 sec)
-
-
-
-mysql> 
-
-
-
-
-
-B
-mysql> alter table student add constraint rpk primary key(roll_no);  /USE CREATE COMAND ONLY
-Query OK, 0 rows affected (0.72 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> desc student;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| roll_no | int(11)     | NO   | PRI | NULL    |       |
-| name    | varchar(12) | YES  |     | NULL    |       |
-| age     | int(11)     | YES  |     | NULL    |       |
-| address | varchar(25) | YES  |     | NULL    |       |
-| gender  | char(1)     | YES  |     | NULL    |       |
-+---------+-------------+------+-----+---------+-------+
-5 rows in set (0.01 sec)
-
-C
-alter table student add constraint c check (age>0 and age<100);  //USE CREATE COMMAND ONLY
-Query OK, 0 rows affected (0.45 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-alter table student modify age int not null;
-Query OK, 0 rows affected (0.72 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> desc student;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| roll_no | int(11)     | NO   | PRI | NULL    |       |
-| name    | varchar(12) | YES  |     | NULL    |       |
-| age     | int(11)     | NO   |     | NULL    |       |
-| address | varchar(25) | YES  |     | NULL    |       |
-| gender  | char(1)     | YES  |     | NULL    |       |
-+---------+-------------+------+-----+---------+-------+
-5 rows in set (0.01 sec)
-
-
-
-D
-mysql> alter table student modify name varchar(12) not null;
-Query OK, 0 rows affected (0.58 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> desc student;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| roll_no | int(11)     | NO   | PRI | NULL    |       |
-| name    | varchar(12) | NO   |     | NULL    |       |
-| age     | int(11)     | YES  |     | NULL    |       |
-| address | varchar(25) | YES  |     | NULL    |       |
-| gender  | char(1)     | YES  |     | NULL    |       |
-+---------+-------------+------+-----+---------+-------+
-5 rows in set (0.00 sec)
-
-
-E
-mysql> alter table student alter gender set default 'm';
-Query OK, 0 rows affected (0.03 sec)
-Records: 0  Duplicates: 0  Warnings: 0
 
 mysql> desc student;
 +---------+-------------+------+-----+---------+-------+
