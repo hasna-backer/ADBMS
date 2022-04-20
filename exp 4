@@ -1,0 +1,114 @@
+Exp4 : DML COMMAND- UPDATE
+
+
+1. Update the price of a particular product.
+
+mysql> update product set price=25 where pid=404;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from product;
++-----+--------------+---------+
+| pid | pname        | price   |
++-----+--------------+---------+
+| 404 | milk         |   25.00 |
+| 408 | pringles     |  100.00 |
+| 409 | sauce        |   70.00 |
+| 411 | nonstick pan |  700.00 |
+| 414 | maggi        |  150.00 |
+| 423 | cooker       | 1700.00 |
+| 448 | pen          |   10.00 |
++-----+--------------+---------+
+7 rows in set (0.00 sec)
+
+mysql> 
+------------------------------------------------------------------------------------------------------------------
+
+
+2. Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table.
+
+mysql> update customer set city='kozhikode' where city='calicut';
+Query OK, 3 rows affected (0.46 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select *from product;
++-----+--------------+---------+
+| pid | pname        | price   |
++-----+--------------+---------+
+| 404 | milk         |   25.00 |
+| 408 | pringles     |  100.00 |
+| 409 | sauce        |   70.00 |
+| 411 | nonstick pan |  700.00 |
+| 414 | maggi        |  150.00 |
+| 423 | cooker       | 1700.00 |
+| 448 | pen          |   10.00 |
++-----+--------------+---------+
+7 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------
+3. Update all prices with 2% of its original price.
+
+
+mysql> update product set price=price+(.02*100);
+Query OK, 7 rows affected (0.06 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> select *from product;
++-----+--------------+---------+
+| pid | pname        | price   |
++-----+--------------+---------+
+| 404 | milk         |   27.00 |
+| 408 | pringles     |  102.00 |
+| 409 | sauce        |   72.00 |
+| 411 | nonstick pan |  702.00 |
+| 414 | maggi        |  152.00 |
+| 423 | cooker       | 1702.00 |
+| 448 | pen          |   12.00 |
++-----+--------------+---------+
+7 rows in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------------
+4. Change the address, city, phone number of a particular customer.
+
+mysql> update customer set city='goa',address='puthiyaveettil',ph_no=8787965432 where id=110;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+| 110 | hasna     | puthiyaveettil | goa       | 8787965432 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | TVM       |       NULL |
+| 286 | aza       | home           | EKM       |       NULL |
++-----+-----------+----------------+-----------+------------+
+8 rows in set (0.00 sec)
+---------------------------------------------------------------------------------------------------------------------------
+5. Change the quantity of a purchased product of inv_id ‘101’
+
+
+mysql> update invoice_item set quantity=8 where inv_id=111 and pid=404 ;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    111 |  404 |        8 |
+|    111 |  448 |       10 |
+|    222 |  408 |        2 |
+|    222 |  409 |        1 |
+|    222 |  448 |        6 |
+|    333 |  448 |       10 |
+|    444 |  411 |        1 |
+|    444 |  404 |        2 |
++--------+------+----------+
+8 rows in set (0.00 sec)
+
+
