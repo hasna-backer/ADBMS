@@ -1,3 +1,6 @@
+          EXP:1 DDL CREATE
+
+
 1)
 
 mysql> create table employee(emp_id varchar(5),name varchar(23),city varchar(12),dob date,adhar_no int(12));
@@ -160,3 +163,4 @@ mysql> desc invoice_item;
 
 //EXP:1 IS DDL-CREATE COMMAND. SO USE CREATE COMMAND ONLY
 
+//ADD EXPERIEMNT NAME
