@@ -1,0 +1,456 @@
+1.      
+List
+all customer details.
+
+
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
++-----+-----------+----------------+-----------+------------+
+5 rows in set (0.00 sec)
+
+
+...........................................................................................................
+
+
+2.      
+List
+pname, price of all products.
+
+mysql> select pname,price from product;
++--------------+---------+
+| pname        | price   |
++--------------+---------+
+| milk         |   25.50 |
+| pringles     |  102.00 |
+| sauce        |   71.40 |
+| nonstick pan |  714.00 |
+| maggi        |  153.00 |
+| cooker       | 1734.00 |
+| pen          |   10.20 |
++--------------+---------+
+7 rows in set (0.00 sec)
+
+........................................................................................................
+
+
+3.      
+List
+all invoice items, avoid duplicates.
+--BEFORE
+mysql> select *from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    444 |  404 |        2 |
+|    111 |  404 |        5 |
+|    111 |  448 |       10 |
+|    111 |  404 |        5 |
+|    111 |  448 |       10 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select distinct inv_id from invoice_item;
++--------+
+| inv_id |
++--------+
+|    111 |
+|    444 |
++--------+
+2 rows in set (0.02 sec)
+
+
+------------------------------------------------------------------------------------------------------------------
+
+
+4.      
+List
+product price between 50rs and 150rs
+
+--BEFORE
+mysql> select *from product; //BEFORE
++-----+--------------+---------+
+| pid | pname        | price   |
++-----+--------------+---------+
+| 404 | milk         |   25.50 |
+| 408 | pringles     |  102.00 |
+| 409 | sauce        |   71.40 |
+| 411 | nonstick pan |  714.00 |
+| 414 | maggi        |  153.00 |
+| 423 | cooker       | 1734.00 |
+| 448 | pen          |   10.20 |
++-----+--------------+---------+
+7 rows in set (0.00 sec)
+
+--QUERY
+mysql> select *from product where price between 50 and 150;
++-----+----------+--------+
+| pid | pname    | price  |
++-----+----------+--------+
+| 408 | pringles | 102.00 |
+| 409 | sauce    |  71.40 |
++-----+----------+--------+
+2 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+5.      
+List
+the customer details who lives in ‘ekm’,’tvm’.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
++-----+-----------+----------------+-----------+------------+
+5 rows in set (0.00 sec)
+
+--QUERY
+mysql> select *from customer where city='EKM' or city='TVM';
++-----+---------+----------------+------+------------+
+| id  | name    | address        | city | ph_no      |
++-----+---------+----------------+------+------------+
+|  17 | amras   | swapna home    | TVM  | 9048676977 |
+| 205 | scissna | dream home     | TVM  | 9078986534 |
+| 223 | mubeena |  rafeek manzil | EKM  | 9978654599 |
++-----+---------+----------------+------+------------+
+3 rows in set (0.02 sec)
+------------------------------------------------------------------------------------------------------------------------------
+
+
+6.      
+List
+the invoice details from 1st January 2021 to 31st march 2022
+
+mysql> select *from invoice_master;
+--BEFORE
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    111 |      17 | 2022-12-23 |
+|    333 |     223 | 2021-02-26 |
+|    334 |     223 | 2022-03-26 |
+|    444 |      17 | 2022-04-26 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+--QUERY
+mysql> select *from invoice_master where inv_date between '2021-1-1' and '2022-3-31';
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    333 |     223 | 2021-02-26 |
+|    334 |     223 | 2022-03-26 |
++--------+---------+------------+
+2 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------------------------------------------
+
+7.      
+List
+the customer details who not live in ‘tvm’.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
++-----+-----------+----------------+-----------+------------+
+5 rows in set (0.00 sec)
+
+--QUERY
+mysql> select *from customer where city not in ('TVM');
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
++-----+-----------+----------------+-----------+------------+
+3 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+8.      
+List
+the customers who have no phone number.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+7 rows in set (0.00 sec)
+
+--QUERY
+mysql> select *from customer where ph_no is NULL;
++-----+-----------+-------------+------+-------+
+| id  | name      | address     | city | ph_no |
++-----+-----------+-------------+------+-------+
+| 256 | sreekanth | sreenilayam | ksd  |  NULL |
+| 286 | aza       | home        | tsr  |  NULL |
++-----+-----------+-------------+------+-------+
+2 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------------------------
+
+9.      
+Display
+customer names in descending order.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+
+--QUERY
+mysql> select name from customer order by name desc;
++-----------+
+| name      |
++-----------+
+| sreekanth |
+| sreekanth |
+| scissna   |
+| mubeena   |
+| aza       |
+| amrtha    |
+| amras     |
++-----------+
+7 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------
+
+
+10.   
+Display
+the customer details sorted in ascending by city and descending by names.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+
+--QUERY
+mysql> select *from customer order by city,name desc;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
++-----+-----------+----------------+-----------+------------+
+7 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------------------
+
+
+11.   
+Find
+the customer names start with ‘A’.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | Amras     | swapna home    | TVM       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+
+--QUERY
+mysql> select name from customer where name like 'A%';
++--------+
+| name   |
++--------+
+| Amras  |
+| amrtha |
+| aza    |
++--------+
+3 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------
+
+12.   
+Find
+the customer names who have ‘e’ or ‘a’ in them.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+|  37 | irin      | swapna home    | ekm       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+8 rows in set (0.00 sec)
+
+--QUERY
+mysql> select name from customer where name like '%E%' or name like '%A%';
++-----------+
+| name      |
++-----------+
+| amras     |
+| amrtha    |
+| scissna   |
+| sreekanth |
+| mubeena   |
+| sreekanth |
+| aza       |
++-----------+
+7 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------
+
+
+13.   
+Find
+the customer names who have at least 4 characters.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+|  37 | irin      | swapna home    | ekm       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+8 rows in set (0.00 sec)
+
+--QUERY
+mysql> select name from customer where length(name) !=3;
++-----------+
+| name      |
++-----------+
+| amras     |
+| irin      |
+| amrtha    |
+| scissna   |
+| sreekanth |
+| mubeena   |
+| sreekanth |
++-----------+
+7 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------
+
+
+14.   
+List
+the names of customers their names have ‘r’ in second position.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+|  37 | irin      | swapna home    | ekm       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+8 rows in set (0.00 sec)
+
+--QUERY
+mysql> select name from customer where name like '_r%';
++-----------+
+| name      |
++-----------+
+| irin      |
+| sreekanth |
+| sreekanth |
++-----------+
+3 rows in set (0.00 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+15.   
+Find
+the customer names start with ‘a’ and are at least 4 characters in length.
+--BEFORE
+mysql> select *from customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+|  37 | irin      | swapna home    | ekm       | 9048676977 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+8 rows in set (0.00 sec)
+
+--QUERY
+mysql> select name from customer where name like 'a___%';
++--------+
+| name   |
++--------+
+| amras  |
+| amrtha |
++--------+
+2 rows in set (0.00 sec)
+
+
