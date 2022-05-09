@@ -1,6 +1,4 @@
-1.      
-List
-all customer details.
+1. List all customer details.
 
 
 mysql> select *from customer;
@@ -453,4 +451,4 @@ mysql> select name from customer where name like 'a___%';
 +--------+
 2 rows in set (0.00 sec)
 
-
+//VERIFIED
