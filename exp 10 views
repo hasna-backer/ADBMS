@@ -1,0 +1,45 @@
+10 VIEWS
+
+
+1.      
+Create
+a view for customers who have purchased products.
+
+mysql> create view purchased_customer as select customer.* from customer inner join invoice_master on customer.id=invoice_master.cust_id;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select *from purchased_customer;
++-----+---------+----------------+------+------------+
+| id  | name    | address        | city | ph_no      |
++-----+---------+----------------+------+------------+
+|  17 | amras   | swapna home    | TVM  | 9048676977 |
+|  17 | amras   | swapna home    | TVM  | 9048676977 |
+| 223 | mubeena |  rafeek manzil | EKM  | 9978654599 |
+| 223 | mubeena |  rafeek manzil | EKM  | 9978654599 |
+| 223 | mubeena |  rafeek manzil | EKM  | 9978654599 |
++-----+---------+----------------+------+------------+
+5 rows in set (0.00 sec)
+----------------------------------------------------------------------------------------------------------------
+
+2.      
+Create
+a view for invoice products[cname, , inv_id, product_id, quantity]
+
+mysql> select customer.name,invoice_master.inv_id,product.pname,invoice_item.quantity from customer inner join invoice_master on customer.id=invoice_master.cust_id inner join invoice_item on invoice_master.inv_id=invoice_item.inv_id inner join product on invoice_item.pid=product.pid;
++---------+--------+--------------+----------+
+| name    | inv_id | pname        | quantity |
++---------+--------+--------------+----------+
+| amras   |    444 | milk         |        2 |
+| amras   |    111 | milk         |        5 |
+| amras   |    111 | pen          |       10 |
+| amras   |    111 | milk         |        5 |
+| amras   |    111 | pen          |       10 |
+| amras   |    444 | milk         |        2 |
+| amras   |    444 | pencil       |        3 |
+| mubeena |    323 | soap         |        6 |
+| mubeena |    333 | maggi        |       24 |
+| mubeena |    334 | nonstick pan |        1 |
++---------+--------+--------------+----------+
+10 rows in set (0.00 sec)
+
+
