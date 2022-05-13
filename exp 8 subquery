@@ -165,4 +165,4 @@ mysql> select name from customer where id in (select cust_id from invoice_master
 +-------+
 1 row in set (0.01 sec)
 
-
+//VERIFIED
