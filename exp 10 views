@@ -42,4 +42,4 @@ mysql> select customer.name,invoice_master.inv_id,product.pname,invoice_item.qua
 +---------+--------+--------------+----------+
 10 rows in set (0.00 sec)
 
-
+//VERIFIED
