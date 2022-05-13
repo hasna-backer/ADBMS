@@ -1,3 +1,4 @@
+EX NO: ???????
 DML- SELECT QUERY 2 (GROUP BY, AGGREGATE FUNCTIONS)
 
 
@@ -168,3 +169,4 @@ mysql> select concat(name,' lives in ',city) as customer_details from customer;
 +------------------------------+
 10 rows in set (0.00 sec)
 
+//VERIFIED
