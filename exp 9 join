@@ -82,3 +82,5 @@ mysql> select customer.name,invoice_master.inv_id,invoice_master.inv_date,produc
 | aza       |   NULL | NULL       | NULL         |     NULL |
 +-----------+--------+------------+--------------+----------+
 18 rows in set (0.00 sec)
+
+//VERIFIED
