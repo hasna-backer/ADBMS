@@ -1,0 +1,84 @@
+9 JOINS
+
+
+1.      
+List
+the product name and quantity of invoice items.
+
+mysql> select product.pname,invoice_item.quantity from product inner join invoice_item on product.pid= invoice_item.pid;
++--------+----------+
+| pname  | quantity |
++--------+----------+
+| milk   |        2 |
+| milk   |        5 |
+| pen    |       10 |
+| milk   |        5 |
+| pen    |       10 |
+| milk   |        2 |
+| pencil |        3 |
++--------+----------+
+7 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------
+2.      
+Display
+invoice details of the transaction dated ’31-01-2022’.
+
+mysql> select customer.name,invoice_master.inv_id,invoice_master.inv_date,product.pname,invoice_item.quantity from customer inner join invoice_master on customer.id=invoice_master.cust_id inner join invoice_item on invoice_master.inv_id=invoice_item.inv_id inner join product on invoice_item.pid=product.pid where inv_date='2022-01-31';
++-------+--------+------------+-------+----------+
+| name  | inv_id | inv_date   | pname | quantity |
++-------+--------+------------+-------+----------+
+| amras |    111 | 2022-01-31 | milk  |        5 |
+| amras |    111 | 2022-01-31 | pen   |       10 |
+| amras |    111 | 2022-01-31 | milk  |        5 |
+| amras |    111 | 2022-01-31 | pen   |       10 |
++-------+--------+------------+-------+----------+
+4 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------------------------
+
+3.      
+Display
+the customer name, product name, invoice date of purchased item ‘pen’.
+
+mysql> select customer.name,product.pname,invoice_master.inv_date from customer inner join invoice_master on customer.id=invoice_master.cust_id inner join invoice_item on invoice_master.inv_id=invoice_item.inv_id inner join product on invoice_item.pid=product.pid where pname='pen';
++-------+-------+------------+
+| name  | pname | inv_date   |
++-------+-------+------------+
+| amras | pen   | 2022-01-31 |
+| amras | pen   | 2022-01-31 |
++-------+-------+------------+
+2 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------
+
+4.      
+Display
+all customer details and invoice details must include customer has not
+purchased item
+
+mysql> select customer.id,customer.name,customer.address,customer.city,customer.ph_no,invoice_master.inv_id,invoice_master.inv_date,product.pname,invoice_item.quantity from customer left join invoice_master on customer.id=invoice_master.cust_id left join invoice_item on invoice_master.inv_id=invoice_item.inv_id left join product on invoice_item.pid=product.pid;
++-----+-----------+----------------+-----------+------------+--------+------------+--------------+----------+
+| id  | name      | address        | city      | ph_no      | inv_id | inv_date   | pname        | quantity |
++-----+-----------+----------------+-----------+------------+--------+------------+--------------+----------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |    444 | 2022-04-26 | milk         |        2 |
+|  17 | amras     | swapna home    | TVM       | 9048676977 |    111 | 2022-01-31 | milk         |        5 |
+|  17 | amras     | swapna home    | TVM       | 9048676977 |    111 | 2022-01-31 | pen          |       10 |
+|  17 | amras     | swapna home    | TVM       | 9048676977 |    111 | 2022-01-31 | milk         |        5 |
+|  17 | amras     | swapna home    | TVM       | 9048676977 |    111 | 2022-01-31 | pen          |       10 |
+|  17 | amras     | swapna home    | TVM       | 9048676977 |    444 | 2022-04-26 | milk         |        2 |
+|  17 | amras     | swapna home    | TVM       | 9048676977 |    444 | 2022-04-26 | pencil       |        3 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |    323 | 2018-02-03 | soap         |        6 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |    333 | 2021-02-26 | maggi        |       24 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |    334 | 2022-03-26 | nonstick pan |        1 |
+|  37 | irin      | swapna home    | ekm       | 9048676977 |   NULL | NULL       | NULL         |     NULL |
+| 110 | bablu     | sweet home     | tvm       | 9048345467 |   NULL | NULL       | NULL         |     NULL |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |   NULL | NULL       | NULL         |     NULL |
+| 156 | hana      | sweet home     | tvm       | 9048345467 |   NULL | NULL       | NULL         |     NULL |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |   NULL | NULL       | NULL         |     NULL |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |   NULL | NULL       | NULL         |     NULL |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |   NULL | NULL       | NULL         |     NULL |
+| 286 | aza       | home           | tsr       |       NULL |   NULL | NULL       | NULL         |     NULL |
++-----+-----------+----------------+-----------+------------+--------+------------+--------------+----------+
+18 rows in set (0.00 sec)
+
