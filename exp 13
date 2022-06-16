@@ -1,0 +1,143 @@
+							Experiment No: 13
+							  TCL COMMANDS 
+1.Commit 
+
+mysql> set autocommit = off;
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> select * from students;
++------+--------+------+
+| roll | name   | age  |
++------+--------+------+
+|    1 | Tony   |   23 |
+|    2 | John   |   22 |
+|    3 | mathew |   22 |
++------+--------+------+
+3 rows in set (0.00 sec)
+mysql> insert into students values(4,'parker',24);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into students values(5,'peter',23);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from students;
++------+--------+------+
+| roll | name   | age  |
++------+--------+------+
+|    1 | Tony   |   23 |
+|    2 | John   |   22 |
+|    3 | mathew |   22 |
+|    4 | parker |   24 |
+|    5 | peter  |   23 |
++------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.06 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.Rollback 
+
+mysql> insert into students values(6,'samuel',24);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into students values(7,'sam',24);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from students;
++------+--------+------+
+| roll | name   | age  |
++------+--------+------+
+|    1 | Tony   |   23 |
+|    2 | John   |   22 |
+|    3 | mathew |   22 |
+|    4 | parker |   24 |
+|    5 | peter  |   23 |
+|    6 | samuel |   24 |
+|    7 | sam    |   24 |
++------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> select * from students;
++------+--------+------+
+| roll | name   | age  |
++------+--------+------+
+|    1 | Tony   |   23 |
+|    2 | John   |   22 |
+|    3 | mathew |   22 |
+|    4 | parker |   24 |
+|    5 | peter  |   23 |
++------+--------+------+
+5 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.Savepoint
+
+
+mysql> savepoint A;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into students values(9,'samuel',24);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into students values(10,'samuel',24);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into students values(11,'alex',24);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from students;
++------+--------+------+
+| roll | name   | age  |
++------+--------+------+
+|    1 | Tony   |   23 |
+|    2 | John   |   22 |
+|    3 | mathew |   22 |
+|    4 | parker |   24 |
+|    5 | peter  |   23 |
+|    9 | samuel |   24 |
+|   10 | samuel |   24 |
+|   11 | alex   |   24 |
++------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql> rollback to B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from students;
++------+--------+------+
+| roll | name   | age  |
++------+--------+------+
+|    1 | Tony   |   23 |
+|    2 | John   |   22 |
+|    3 | mathew |   22 |
+|    4 | parker |   24 |
+|    5 | peter  |   23 |
+|    9 | samuel |   24 |
+|   10 | samuel |   24 |
++------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> rollback to A;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from students;
++------+--------+------+
+| roll | name   | age  |
++------+--------+------+
+|    1 | Tony   |   23 |
+|    2 | John   |   22 |
+|    3 | mathew |   22 |
+|    4 | parker |   24 |
+|    5 | peter  |   23 |
++------+--------+------+
+5 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------

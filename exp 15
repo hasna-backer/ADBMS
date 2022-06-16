@@ -1,0 +1,66 @@
+							Experiment No: 15
+						15 PL/SQL PROGRAMS – FUNCTIONS
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Create a function to calculate price_range(low, medium, high) of each product. If price<=5 indicate as low, upto 50 indicate as medium, and above as high.
+
+
+mysql> select * from Product;
++-----+--------------+---------+
+| pid | pname        | price   |
++-----+--------------+---------+
+|  54 | soap         |   35.00 |
+| 404 | milk         |   25.50 |
+| 408 | pringles     |  102.00 |
+| 409 | sauce        |   71.40 |
+| 411 | nonstick pan |  714.00 |
+| 414 | maggi        |  153.00 |
+| 423 | cooker       | 1734.00 |
+| 448 | pen          |   10.20 |
+| 488 | pencil       |   15.00 |
++-----+--------------+---------+
+
+6 rows in set (0.00 sec)
+
+
+
+QUERY::
+
+mysql> create function price_range(price int)
+    -> returns varchar(20)
+    -> deterministic
+    -> begin
+    -> declare price_range varchar(20);
+    -> if price <= 5 then
+    -> set price_range='low';
+    -> else if (price > 5) and (price <= 50) then
+    -> set price_range='medium';
+    -> else
+    -> set price_range='high';
+    -> end if;
+    -> end if;
+    -> return(price_range);
+    -> end
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> delimiter ;
+mysql> select pname,price,price_range(price) from Product order by price;
++--------------+---------+--------------------+
+| pname        | price   | price_range(price) |
++--------------+---------+--------------------+
+| pen          |   10.20 | medium             |
+| pencil       |   15.00 | medium             |
+| milk         |   25.50 | medium             |
+| soap         |   35.00 | medium             |
+| sauce        |   71.40 | high               |
+| pringles     |  102.00 | high               |
+| maggi        |  153.00 | high               |
+| nonstick pan |  714.00 | high               |
+| cooker       | 1734.00 | high               |
++--------------+---------+--------------------+
+
+6 rows in set (0.01 sec)
+
+//VERIFIED

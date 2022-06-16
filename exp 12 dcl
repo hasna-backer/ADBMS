@@ -1,0 +1,79 @@
+12. DCL COMMAND
+Create two users user1, user2
+
+ mysql> create user user1@localhost identified by 'user1';
+ Query OK, 0 rows affected (0.00 sec)
+
+
+ mysql> create user user2@localhost identified by 'user2';
+ Query OK, 0 rows affected (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.GRANT 
+
+ Give insert and select privilege to user 1 on customer table in the invoice database.
+
+
+ mysql> show grants for user1@localhost;
++-------------------------------------------+
+| Grants for user1@localhost                |
++-------------------------------------------+
+| GRANT USAGE ON *.* TO 'user1'@'localhost' |
++-------------------------------------------+
+1 row in set (0.00 sec)
+
+
+mysql> grant insert,select on Customer to user1@localhost;//INVOICE.CUSTOMER
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> show grants for user1@localhost;
++---------------------------------------------------------------------+
+| Grants for user1@localhost                                          |
++---------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'user1'@'localhost'                           |
+| GRANT SELECT, INSERT ON `INVOICE`.`Customer` TO 'user1'@'localhost' |
++---------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+--------------------------------------------------------------------------------
+ 
+ Give update and delete privilege to user 2 on all tables in the invoice database. INVOICE.*
+
+mysql> show grants for user2@localhost;
++-------------------------------------------+
+| Grants for user2@localhost                |
++-------------------------------------------+
+| GRANT USAGE ON *.* TO 'user2'@'localhost' |
++-------------------------------------------+
+1 row in set (0.00 sec)
+
+
+mysql> grant update,delete on * to user2@localhost;
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> show grants for user2@localhost;
++------------------------------------------------------------+
+| Grants for user2@localhost                                 |
++------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'user2'@'localhost'                  |
+| GRANT UPDATE, DELETE ON `INVOICE`.* TO 'user2'@'localhost' |
++------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------
+
+2.REVOKE 
+ 
+ Remove delete privilege of user 2.
+
+ mysql> revoke delete on *.* from user2@localhost;
+ Query OK, 0 rows affected (0.01 sec)
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
