@@ -1,0 +1,47 @@
+							Experiment No: 20
+					NoSQL – AGGREGATE FUNCTIONS AND REGULAR EXPRESSIONS
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Write a MongoDB query to sort customer details in ascending order of their name.
+
+> db.CUSTOMER.find().sort({Name:1})
+{ "_id" : ObjectId("62a81592a268c49a134a33f8"), "Name" : "Cris", "City" : "UK", "PhNo" : "9458042845", "Age" : 28 }
+{ "_id" : ObjectId("62a815afa268c49a134a33f9"), "Name" : "Evan", "City" : "London", "PhNo" : "9458472845", "Age" : 30 }
+{ "_id" : ObjectId("62a81568a268c49a134a33f7"), "Name" : "Peter", "City" : "Canada", "PhNo" : "7558042845", "Age" : 25 }
+{ "_id" : ObjectId("62a81b36a268c49a134a33ff"), "Name" : "Tony", "City" : "Canada", "PhNo" : "7558042864", "Age" : 25 }
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Write a MongoDB query to count number of customers in each city.
+
+> db.CUSTOMER.find()
+{ "_id" : ObjectId("62a81568a268c49a134a33f7"), "Name" : "Peter", "City" : "Canada", "PhNo" : "7558042845", "Age" : 25 }
+{ "_id" : ObjectId("62a81592a268c49a134a33f8"), "Name" : "Cris", "City" : "UK", "PhNo" : "9458042845", "Age" : 28 }
+{ "_id" : ObjectId("62a815afa268c49a134a33f9"), "Name" : "Evan", "City" : "London", "PhNo" : "9458472845", "Age" : 30 }
+{ "_id" : ObjectId("62a81b36a268c49a134a33ff"), "Name" : "Tony", "City" : "Canada", "PhNo" : "7558042864", "Age" : 25 }
+{ "_id" : ObjectId("62a82505a268c49a134a3401"), "Name" : "Sam", "City" : "USA", "PhNo" : "9497472845", "Age" : 32 }
+{ "_id" : ObjectId("62a8251ea268c49a134a3402"), "Name" : "Aza", "City" : "Canada", "PhNo" : "9497472845", "Age" : 22 }
+{ "_id" : ObjectId("62a825bfa268c49a134a3403"), "Name" : "Samuel", "City" : "USA", "PhNo" : "9497472845", "Age" : 22 }
+
+
+
+> db.CUSTOMER.aggregate([{$group:{_id:"$City",max_Age:{$max:"$Age"},min_Age:{$min:"$Age"}}}])
+{ "_id" : "London", "max_Age" : 30, "min_Age" : 30 }
+{ "_id" : "Canada", "max_Age" : 25, "min_Age" : 22 }
+{ "_id" : "USA", "max_Age" : 32, "min_Age" : 22 }
+{ "_id" : "UK", "max_Age" : 28, "min_Age" : 28 }
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+3.Write a MongoDB query to find minimum and maximum age in each city.
+
+> db.CUSTOMER.aggregate([{$group:{_id:"$City",max_Age:{$max:"$Age"},min_Age:{$min:"$Age"}}}])
+{ "_id" : "London", "max_Age" : 30, "min_Age" : 30 }
+{ "_id" : "Canada", "max_Age" : 25, "min_Age" : 25 }
+{ "_id" : "UK", "max_Age" : 28, "min_Age" : 28 }
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+//VERIFIED
+

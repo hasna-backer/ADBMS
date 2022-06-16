@@ -1,0 +1,99 @@
+						Experiment No: 21- NoSQL – ADMINISTRATION
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+1.Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database. 
+
+> db.createUser({user:"Aza",pwd:"1234",roles:[{ role :"read",db:"INVOICE"}]})
+Successfully added user: {
+	"user" : "Aza",
+	"roles" : [
+		{
+			"role" : "read",
+			"db" : "INVOICE"
+		}
+	]
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.Write a MongoDB query to create the backup for the INVOICE database.
+
+ksb@ksb-OptiPlex-3060:~$ sudo mkdir /var/backups/mongobackups
+[sudo] password for ksb: 
+
+ksb@ksb-OptiPlex-3060:~$ sudo mongodump --db INVOICE --out /var/backups/mongobackups
+2022-06-14T11:58:43.634+0530	writing INVOICE.CUSTOMER to /var/backups/mongobackups/INVOICE/CUSTOMER.bson
+2022-06-14T11:58:43.635+0530	done dumping INVOICE.CUSTOMER (7 documents)
+2022-06-14T11:58:43.638+0530	writing INVOICE.PRODUCT to /var/backups/mongobackups/INVOICE/PRODUCT.bson
+2022-06-14T11:58:43.639+0530	done dumping INVOICE.PRODUCT (4 documents)
+
+ksb@ksb-OptiPlex-3060:~$ cd /var/backups/mongobackups 
+
+ksb@ksb-OptiPlex-3060:/var/backups/mongobackups$ ls -l 
+total 4
+drwxr-xr-x 2 root root 4096 Jun 14 11:58 INVOICE
+
+ksb@ksb-OptiPlex-3060:/var/backups/mongobackups$ cd /var/backups/mongobackups/INVOICE
+
+ksb@ksb-OptiPlex-3060:/var/backups/mongobackups/INVOICE$ ls -l
+total 16
+-rw-r--r-- 1 root root 607 Jun 14 11:58 CUSTOMER.bson
+-rw-r--r-- 1 root root 175 Jun 14 11:58 CUSTOMER.metadata.json
+-rw-r--r-- 1 root root 207 Jun 14 11:58 PRODUCT.bson
+-rw-r--r-- 1 root root 174 Jun 14 11:58 PRODUCT.metadata.json
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+3.Write a MongoDB query to restore a particular database or a collection.
+
+> use INVOICE
+switched to db INVOICE
+
+
+> db.dropDatabase()
+{ "dropped" : "INVOICE", "ok" : 1 }
+
+
+ksb@ksb-OptiPlex-3060:~$ sudo mongorestore /var/backups/mongobackups
+2022-06-14T12:19:18.011+0530	preparing collections to restore from
+2022-06-14T12:19:18.012+0530	reading metadata for INVOICE.CUSTOMER from /var/backups/mongobackups/INVOICE/CUSTOMER.metadata.json
+2022-06-14T12:19:18.012+0530	reading metadata for INVOICE.PRODUCT from /var/backups/mongobackups/INVOICE/PRODUCT.metadata.json
+2022-06-14T12:19:18.334+0530	restoring INVOICE.PRODUCT from /var/backups/mongobackups/INVOICE/PRODUCT.bson
+2022-06-14T12:19:18.346+0530	finished restoring INVOICE.PRODUCT (4 documents, 0 failures)
+2022-06-14T12:19:18.456+0530	restoring INVOICE.CUSTOMER from /var/backups/mongobackups/INVOICE/CUSTOMER.bson
+2022-06-14T12:19:18.469+0530	finished restoring INVOICE.CUSTOMER (7 documents, 0 failures)
+2022-06-14T12:19:18.469+0530	no indexes to restore for collection INVOICE.CUSTOMER
+2022-06-14T12:19:18.469+0530	no indexes to restore for collection INVOICE.PRODUCT
+2022-06-14T12:19:18.469+0530	11 document(s) restored successfully. 0 document(s) failed to restore.
+ksb@ksb-OptiPlex-3060:~$ mongo
+MongoDB shell version v4.4.1
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("de96f90b-1304-409d-a4ed-ac4f8e53b547") }
+MongoDB server version: 4.4.1
+---
+The server generated these startup warnings when booting: 
+        2022-06-14T10:19:30.158+05:30: ***** SERVER RESTARTED *****
+        2022-06-14T10:19:30.290+05:30: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2022-06-14T10:19:31.653+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+INVOICE  0.000GB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+> 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+//VERIFIED

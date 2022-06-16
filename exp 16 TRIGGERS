@@ -1,0 +1,135 @@
+							Experiment No: 16
+						PL/SQL PROGRAMS – TRIGGERS
+------------------------------------------------------------------------------------------------------------------------------------------
+
+1.Create a trigger to handle updates to the customer table. 
+
+
+
+
+
+mysql> create table Customer_old(id int primary key,name varchar(20),address varchar(20),city varchar(20),ph_no bigint);
+Query OK, 0 rows affected (0.40 sec)
+
+
+mysql> delimiter //
+mysql> create trigger updatetrigger
+    -> before update
+    -> on Customer for each row
+    -> begin
+    -> insert into Customer_old values (old.id,old.name,old.address,old.city,old.ph_no);
+    -> end //
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> select * from Customer;
+    -> //
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+|  37 | irin      | swapna home    | ekm       | 9048676977 |
+| 110 | bablu     | sweet home     | tvm       | 9048345467 |
+| 111 | amrtha    | vyga home      | kozhikode | 9048123327 |
+| 156 | hana      | sweet home     | tvm       | 9048345467 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+
+10 rows in set (0.01 sec)
+
+
+mysql> update Customer set city='Tvm' where id=19;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Customer_old;
++-----+--------+-----------+-----------+------------+
+| id  | name   | address   | city      | ph_no      |
++-----+--------+-----------+-----------+------------+
+| 111 | amrtha | vyga home | kozhikode | 9048123327 |
++-----+--------+-----------+-----------+------------+
+1 row in set (0.00 sec)
+
+
+mysql> select * from Customer;
++-----+-----------+----------------+-----------+------------+
+| id  | name      | address        | city      | ph_no      |
++-----+-----------+----------------+-----------+------------+
+|  17 | amras     | swapna home    | TVM       | 9048676977 |
+|  37 | irin      | swapna home    | ekm       | 9048676977 |
+| 110 | bablu     | sweet home     | tvm       | 9048345467 |
+| 111 | amrtha    | vyga home      | Tvm       | 9048123327 |
+| 156 | hana      | sweet home     | tvm       | 9048345467 |
+| 205 | scissna   | dream home     | TVM       | 9078986534 |
+| 212 | sreekanth | sreenilayam    | kozhikode | 9978654599 |
+| 223 | mubeena   |  rafeek manzil | EKM       | 9978654599 |
+| 256 | sreekanth | sreenilayam    | ksd       |       NULL |
+| 286 | aza       | home           | tsr       |       NULL |
++-----+-----------+----------------+-----------+------------+
+10 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+2.Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
+
+mysql> create trigger inserttrigger
+    -> before insert
+    -> on Product for each row
+    -> begin
+    -> if new.price < 5 then
+    -> set new.price=10;
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.09 sec)
+
+
+mysql> select * from Product;
+    -> //
++-----+--------------+---------+
+| pid | pname        | price   |
++-----+--------------+---------+
+|  54 | soap         |   35.00 |
+| 404 | milk         |   25.50 |
+| 408 | pringles     |  102.00 |
+| 409 | sauce        |   71.40 |
+| 411 | nonstick pan |  714.00 |
+| 414 | maggi        |  153.00 |
+| 423 | cooker       | 1734.00 |
+| 448 | pen          |   10.20 |
+| 488 | pencil       |   15.00 |
++-----+--------------+---------+
+9 rows in set (0.00 sec)
+
+
+mysql> insert into Product values(117,'pen',3);
+    -> //
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from Product;
+    -> //
+
++-----+--------------+---------+
+| pid | pname        | price   |
++-----+--------------+---------+
+|  54 | soap         |   35.00 |
+| 117 | pen          |    3.00 |
+| 404 | milk         |   25.50 |
+| 408 | pringles     |  102.00 |
+| 409 | sauce        |   71.40 |
+| 411 | nonstick pan |  714.00 |
+| 414 | maggi        |  153.00 |
+| 423 | cooker       | 1734.00 |
+| 448 | pen          |   10.20 |
+| 488 | pencil       |   15.00 |
++-----+--------------+---------+
+
+7 rows in set (0.01 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//VERIFIED

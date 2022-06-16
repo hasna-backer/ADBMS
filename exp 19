@@ -1,0 +1,81 @@
+							Experiment No: 19
+						    NoSQL- Retrieving data
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Write a MongoDB query to display the customer documents having city 'London' 'Canada'
+
+> db.CUSTOMER.find({$or:[{"City":"London"},{"City":"Canada"}]}).pretty()
+{
+	"_id" : ObjectId("62a81568a268c49a134a33f7"),
+	"Name" : "Peter",
+	"City" : "Canada",
+	"PhNo" : "7558042845",
+	"Age" : 25
+}
+{
+	"_id" : ObjectId("62a815afa268c49a134a33f9"),
+	"Name" : "Evan",
+	"City" : "London",
+	"PhNo" : "9458472845",
+	"Age" : 30
+}
+{
+	"_id" : ObjectId("62a81b36a268c49a134a33ff"),
+	"Name" : "Tony",
+	"City" : "Canada",
+	"PhNo" : "7558042864",
+	"Age" : 25
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+2.Write a MongoDB query to display all customer documents who have age >28.
+
+> db.CUSTOMER.find({"Age":{$gt:28}}).pretty()
+{
+	"_id" : ObjectId("62a815afa268c49a134a33f9"),
+	"Name" : "Evan",
+	"City" : "London",
+	"PhNo" : "9458472845",
+	"Age" : 30
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+3.Write a MongoDB query to find customer documents who not live in ‘London’.
+
+> db.CUSTOMER.find({"City":{$ne:"TVM"}}).pretty()
+{
+	"_id" : ObjectId("62a81568a268c49a134a33f7"),
+	"Name" : "Peter",
+	"City" : "Canada",
+	"PhNo" : "7558042845",
+	"Age" : 25
+}
+{
+	"_id" : ObjectId("62a81592a268c49a134a33f8"),
+	"Name" : "Cris",
+	"City" : "UK",
+	"PhNo" : "9458042845",
+	"Age" : 28
+}
+{
+	"_id" : ObjectId("62a815afa268c49a134a33f9"),
+	"Name" : "Evan",
+	"City" : "London",
+	"PhNo" : "9458472845",
+	"Age" : 30
+}
+{
+	"_id" : ObjectId("62a81b36a268c49a134a33ff"),
+	"Name" : "Tony",
+	"City" : "Canada",
+	"PhNo" : "7558042864",
+	"Age" : 25
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+//VERIFIED
