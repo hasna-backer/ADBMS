@@ -80,5 +80,5 @@ mysql> select concat(name,' lives in ',city) as customer_details from customer;
 | aza lives in tsr             |
 +------------------------------+
 10 rows in set (0.00 sec)
-
+ 
 //VERIFIED
