@@ -17,7 +17,7 @@ mysql> select *from product;
 | 411 | nonstick pan |  700.00 |
 | 414 | maggi        |  150.00 |
 | 423 | cooker       | 1700.00 |
-| 448 | pen          |   10.00 |
+| 448 | pen          |   25.00 |
 +-----+--------------+---------+
 7 rows in set (0.00 sec)
 
