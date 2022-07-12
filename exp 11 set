@@ -1,16 +1,113 @@
-11 Optimising database (Using Set, arithmetic, logical and special
-operators)
+							Experiment No: 11
+					Optimising database (Using Set, arithmetic, logical and special operators)
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1.Display customer_id,city who lives either in CCU or tvm.(using set operation)
+
+QUERY:
 
 
-1.Display customer_id who didn’t purchase items.(using set operation)
+mysql> select id,city from Customer where city="CCU" UNION select id,city from Customer where city="Tvm";
++----+------+
+| id | city |
++----+------+
+| 15 | CCU  |
+| 17 | CCU  |
+| 18 | CCU  |
+| 19 | CCU  |
+| 11 | Tvm  |
+| 20 | Tvm  |
+| 21 | Tvm  |
++----+------+
+7 rows in set (0.00 sec)
 
 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
 2.Display product details with an updated price amount(new price= old price+5rs)
 
+QUERY:
 
-3.Display customer details who doesn’t have phone number and lives in ‘Calicut’ city (use logical operators)
+mysql> select pid,pname,price,price+5 as "price+5" from Product;
++-----+------------+--------+---------+
+| pid | pname      | price  | price+5 |
++-----+------------+--------+---------+
+| 111 | Apple      | 153.00 |  158.00 |
+| 112 | Orange     |  40.80 |   45.80 |
+| 113 | Grape      |  51.00 |   56.00 |
+| 114 | Pine apple | 138.21 |  143.21 |
+| 115 | Watermelon |  26.01 |   31.01 |
+| 116 | soap       |  45.50 |   50.50 |
++-----+------------+--------+---------+
+6 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+3.Display customer details who doesn’t have phone number and lives in ‘Calicut’ city (use logical operators) //city=Trissur
 
 
-4.List the product names if it finds any records in the invoice items table has quantity =3 (use special operators)
+mysql> select * from Customer;
++----+---------+---------------+------------+------------+
+| id | name    | address       | city       | ph_no      |
++----+---------+---------------+------------+------------+
+| 11 | Amrutha | Madhuchirayil | Tvm        | 6238784830 |
+| 12 | Aza     | Pariyarth     | Ekm        | 6238487830 |
+| 13 | Sravan  | Kammath       | Malappuram | 7558561234 |
+| 14 | Hasna   | Ettamtharayil | Thrissur   |       NULL |
+| 15 | irin    | Kalarikkal    | CCU        | 7558042864 |
+| 17 | mubeena | Kalarikkal    | CCU        | 7558042864 |
+| 18 | janan   | Kalarikkal    | CCU        | 7558042864 |
+| 19 | Akshay  | Kalaril       | CCU        | 7558042864 |
+| 20 | Ajith   | Kakkatil      | Tvm        | 7558042864 |
+| 21 | parker  | marvel        | Tvm        | 7558042864 |
++----+---------+---------------+------------+------------+
+10 rows in set (0.00 sec)
 
-//RESUBMIT
+
+QUERY:
+
+mysql>  select * from Customer where city='Thrissur' AND ph_no is null;
++----+-------+---------------+----------+-------+
+| id | name  | address       | city     | ph_no |
++----+-------+---------------+----------+-------+
+| 14 | Hasna | Ettamtharayil | Thrissur |  NULL |
++----+-------+---------------+----------+-------+
+1 row in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+4.List the product names if it finds any records in the invoice items table has quantity =3 (use special operators) 
+
+mysql> select * from Product;
++-----+------------+--------+
+| pid | pname      | price  |
++-----+------------+--------+
+| 111 | Apple      | 153.00 |
+| 112 | Orange     |  40.80 |
+| 113 | Grape      |  51.00 |
+| 114 | Pine apple | 138.21 |
+| 115 | Watermelon |  26.01 |
+| 116 | soap       |  45.50 |
++-----+------------+--------+
+6 rows in set (0.00 sec)
+
+
+mysql> select * from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    101 |  112 |        2 |
+|    101 |  114 |        4 |
+|    103 |  115 |        3 |
+|    103 |  115 |        5 |
+|    111 |  116 |        5 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+
+QUERY:
+
+mysql> select pname from Product where pid in(select pid from Invoice_item where quantity=3);
++------------+
+| pname      |
++------------+
+| Watermelon |
++------------+
+1 row in set (0.01 sec)
