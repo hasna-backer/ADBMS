@@ -1,0 +1,121 @@
+							Experiment No: 14
+ 						PL/SQL PROGRAMS- STORED PROCEDURES 
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.Create a procedure to display all tables in the invoice database. 
+
+mysql> delimiter //
+mysql> create procedure invoice()
+    -> begin
+    -> select * from Customer;
+    -> select * from Product;
+    -> select * from Invoice_master;
+    -> select * from Invoice_item;
+    -> end //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call invoice();
+    -> //
++----+---------+---------------+------------+------------+
+| id | name    | address       | city       | ph_no      |
++----+---------+---------------+------------+------------+
+| 11 | Amrutha | Madhuchirayil | Tvm        | 6238784830 |
+| 12 | Aza     | Pariyarth     | Ekm        | 6238487830 |
+| 13 | Sravan  | Kammath       | Malappuram | 7558561234 |
+| 14 | Hasna   | Ettamtharayil | Thrissur   |       NULL |
+| 15 | irin    | Kalarikkal    | CCU        | 7558042864 |
+| 17 | mubeena | Kalarikkal    | CCU        | 7558042864 |
+| 18 | janan   | Kalarikkal    | CCU        | 7558042864 |
+| 19 | Akshay  | Kalaril       | CCU        | 7558042864 |
+| 20 | Ajith   | Kakkatil      | Tvm        | 7558042864 |
+| 21 | parker  | marvel        | Tvm        | 7558042864 |
++----+---------+---------------+------------+------------+
+10 rows in set (0.00 sec)
+
++-----+------------+--------+
+| pid | pname      | price  |
++-----+------------+--------+
+| 111 | Apple      | 153.00 |
+| 112 | Orange     |  40.80 |
+| 113 | Grape      |  51.00 |
+| 114 | Pine apple | 138.21 |
+| 115 | Watermelon |  26.01 |
+| 116 | soap       |  45.50 |
++-----+------------+--------+
+6 rows in set (0.00 sec)
+
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    101 |      11 | 2022-01-12 |
+|    103 |      12 | 2022-02-22 |
+|    111 |      14 | 2020-10-21 |
++--------+---------+------------+
+3 rows in set (0.00 sec)
+
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    101 |  112 |        2 |
+|    101 |  114 |        4 |
+|    103 |  115 |        3 |
+|    103 |  115 |        5 |
+|    111 |  116 |        5 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.Create a procedure to find greatest of 3 numbers.
+
+
+mysql> delimiter //
+mysql> create procedure greatest ( a int,b int,c int)
+    -> begin
+    -> if (a>b) and (a>c) then
+    -> select a as 'Greatest';
+    -> elseif (b>a) and (b>c) then
+    -> select b as 'Greatest';
+    -> else
+    -> select c as 'Greatest';
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> call greatest(1,2,3);
+    -> //
++----------+
+| Grertest |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+3. Create a procedure to display invoice details of a particular customer.
+
+
+mysql> create procedure invoice_details(a varchar(10))
+    -> begin
+    -> select * from Invoice_master where cust_id in (select id from Customer where name =a);
+    -> end
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call invoice_details('Aza');
+    -> //
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    103 |      12 | 2022-02-22 |
++--------+---------+------------+
+1 row in set (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
