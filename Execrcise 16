@@ -1,0 +1,121 @@
+						Experiment No: 16
+						PL/SQL PROGRAMS – TRIGGERS
+------------------------------------------------------------------------------------------------------------------------------------------
+
+1.Create a trigger to handle updates to the customer table. 
+
+
+
+
+
+mysql> create table Customer_old(id int primary key,name varchar(20),address varchar(20),city varchar(20),ph_no bigint);
+Query OK, 0 rows affected (0.40 sec)
+
+
+mysql> delimiter //
+mysql> create trigger updatetrigger
+    -> before update
+    -> on Customer for each row
+    -> begin
+    -> insert into Customer_old values (old.id,old.name,old.address,old.city,old.ph_no);
+    -> end //
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> select * from Customer;
+    -> //
++----+---------+---------------+------------+------------+
+| id | name    | address       | city       | ph_no      |
++----+---------+---------------+------------+------------+
+| 11 | Amrutha | Madhuchirayil | Tvm        | 6238784830 |
+| 12 | Aza     | Pariyarth     | Ekm        | 6238487830 |
+| 13 | Sravan  | Kammath       | Malappuram | 7558561234 |
+| 14 | Hasna   | Ettamtharayil | Thrissur   |       NULL |
+| 15 | irin    | Kalarikkal    | CCU        | 7558042864 |
+| 17 | mubeena | Kalarikkal    | CCU        | 7558042864 |
+| 18 | janan   | Kalarikkal    | CCU        | 7558042864 |
+| 19 | Akshay  | Kalaril       | CCU        | 7558042864 |
+| 20 | Ajith   | Kakkatil      | Tvm        | 7558042864 |
+| 21 | parker  | marvel        | Tvm        | 7558042864 |
++----+---------+---------------+------------+------------+
+10 rows in set (0.01 sec)
+
+
+mysql> update Customer set city='Tvm' where id=19;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Customer_old;
++----+--------+---------+------+------------+
+| id | name   | address | city | ph_no      |
++----+--------+---------+------+------------+
+| 19 | Akshay | Kalaril | CCU  | 7558042864 |
++----+--------+---------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Customer;
++----+---------+---------------+------------+------------+
+| id | name    | address       | city       | ph_no      |
++----+---------+---------------+------------+------------+
+| 11 | Amrutha | Madhuchirayil | Tvm        | 6238784830 |
+| 12 | Aza     | Pariyarth     | Ekm        | 6238487830 |
+| 13 | Sravan  | Kammath       | Malappuram | 7558561234 |
+| 14 | Hasna   | Ettamtharayil | Thrissur   |       NULL |
+| 15 | irin    | Kalarikkal    | CCU        | 7558042864 |
+| 17 | mubeena | Kalarikkal    | CCU        | 7558042864 |
+| 18 | janan   | Kalarikkal    | CCU        | 7558042864 |
+| 19 | Akshay  | Kalaril       | Tvm        | 7558042864 |
+| 20 | Ajith   | Kakkatil      | Tvm        | 7558042864 |
+| 21 | parker  | marvel        | Tvm        | 7558042864 |
++----+---------+---------------+------------+------------+
+10 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+2.Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
+
+mysql> create trigger inserttrigger
+    -> before insert
+    -> on Product for each row
+    -> begin
+    -> if new.price < 5 then
+    -> set new.price=10;
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.09 sec)
+
+
+mysql> select * from Product;
+    -> //
++-----+------------+--------+
+| pid | pname      | price  |
++-----+------------+--------+
+| 111 | Apple      | 153.00 |
+| 112 | Orange     |  40.80 |
+| 113 | Grape      |  51.00 |
+| 114 | Pine apple | 138.21 |
+| 115 | Watermelon |  26.01 |
+| 116 | soap       |  45.50 |
++-----+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> insert into Product values(117,'pen',3);
+    -> //
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from Product;
+    -> //
+
++-----+------------+--------+
+| pid | pname      | price  |
++-----+------------+--------+
+| 111 | Apple      | 153.00 |
+| 112 | Orange     |  40.80 |
+| 113 | Grape      |  51.00 |
+| 114 | Pine apple | 138.21 |
+| 115 | Watermelon |  26.01 |
+| 116 | soap       |  45.50 |
+| 117 | pen        |  10.00 |
++-----+------------+--------+
+7 rows in set (0.01 sec)
+
