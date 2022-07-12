@@ -1,0 +1,56 @@
+						Experiment No: 15
+						15 PL/SQL PROGRAMS – FUNCTIONS
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Create a function to calculate price_range(low, medium, high) of each product. If price<=5 indicate as low, upto 50 indicate as medium, and above as high.
+
+
+mysql> select * from Product;
++-----+------------+--------+
+| pid | pname      | price  |
++-----+------------+--------+
+| 111 | Apple      | 153.00 |
+| 112 | Orange     |  40.80 |
+| 113 | Grape      |  51.00 |
+| 114 | Pine apple | 138.21 |
+| 115 | Watermelon |  26.01 |
+| 116 | soap       |  45.50 |
++-----+------------+--------+
+6 rows in set (0.00 sec)
+
+
+
+QUERY::
+
+mysql> create function price_range(price int)
+    -> returns varchar(20)
+    -> deterministic
+    -> begin
+    -> declare price_range varchar(20);
+    -> if price <= 5 then
+    -> set price_range='low';
+    -> else if (price > 5) and (price <= 50) then
+    -> set price_range='medium';
+    -> else
+    -> set price_range='high';
+    -> end if;
+    -> end if;
+    -> return(price_range);
+    -> end
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> delimiter ;
+mysql> select pname,price,price_range(price) from Product order by price;
++------------+--------+--------------------+
+| pname      | price  | price_range(price) |
++------------+--------+--------------------+
+| Watermelon |  26.01 | medium             |
+| Orange     |  40.80 | medium             |
+| soap       |  45.50 | medium             |
+| Grape      |  51.00 | high               |
+| Pine apple | 138.21 | high               |
+| Apple      | 153.00 | high               |
++------------+--------+--------------------+
+6 rows in set (0.01 sec)
